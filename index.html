@@ -1,0 +1,727 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bisma Prasetya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root {
+    --bg: #FFF8E7;
+    --paper: #FFFFFF;
+    --ink: #111111;
+    --muted: #5B5445;
+    --yellow: #FFD23F;
+    --coral: #FF6B6B;
+    --sky: #74B9FF;
+    --ok: #22B864;
+    --line: #111111;
+    --shadow: #111111;
+    --chip-text: #111111;
+    --term-bg: #151411;
+    --term-text: #F3EBD6;
+    --display: 'Bricolage Grotesque', 'Arial Black', Impact, sans-serif;
+    --body: 'Figtree', 'Segoe UI', Helvetica, Arial, sans-serif;
+    --mono: 'JetBrains Mono', Consolas, Menlo, monospace;
+    --ease: cubic-bezier(.34, 1.56, .64, 1);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #17150F;
+      --paper: #23201A;
+      --ink: #F5EDD8;
+      --muted: #B8AE95;
+      --line: #F5EDD8;
+      --shadow: #000000;
+      --term-bg: #0C0B08;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #17150F;
+    --paper: #23201A;
+    --ink: #F5EDD8;
+    --muted: #B8AE95;
+    --line: #F5EDD8;
+    --shadow: #000000;
+    --term-bg: #0C0B08;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    padding-inline: 20px;
+    overflow-x: clip;
+    transition: background .4s ease, color .4s ease;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(var(--ink) 1px, transparent 1px);
+    background-size: 22px 22px;
+    opacity: .07;
+    pointer-events: none;
+    z-index: 0;
+  }
+  html { overflow-x: clip; }
+  main { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding-block: 28px 80px; display: grid; gap: 72px; }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.05; text-wrap: balance; margin: 0; }
+  h2 { font-size: clamp(30px, 5vw, 48px); font-weight: 800; }
+  p { margin: 0; }
+  code, .mono { font-family: var(--mono); }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+
+  .box {
+    background: var(--paper);
+    border: 3px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 6px 6px 0 var(--shadow);
+  }
+  .btn {
+    font: 700 15px/1 var(--mono);
+    letter-spacing: .02em;
+    padding: 13px 18px;
+    border: 3px solid var(--line);
+    border-radius: 6px;
+    background: var(--yellow);
+    color: #111;
+    box-shadow: 4px 4px 0 var(--shadow);
+    cursor: pointer;
+    transition: transform .18s var(--ease), box-shadow .18s var(--ease), background .2s;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--shadow); }
+  .btn:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--shadow); }
+  .btn.ghost { background: var(--paper); color: var(--ink); }
+  .btn.coral { background: var(--coral); }
+  .btn.sky { background: var(--sky); }
+
+  .eyebrow {
+    font: 700 13px/1 var(--mono);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 12px;
+  }
+  .section-head { display: grid; gap: 10px; margin-bottom: 26px; max-width: 62ch; }
+  .section-head p { color: var(--muted); }
+
+  /* top bar */
+  .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .logo {
+    font: 800 20px/1 var(--display);
+    background: var(--ink); color: var(--bg);
+    padding: 10px 12px; border-radius: 6px;
+    transform: rotate(-3deg);
+  }
+  .top-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* hero */
+  .hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: 36px; align-items: center; }
+  .hero h1 { font-size: clamp(40px, 7.6vw, 96px); font-weight: 800; letter-spacing: -.02em; }
+  .hero h1 .word { display: inline-block; white-space: nowrap; }
+  .hero h1 .l { display: inline-block; transition: transform .35s var(--ease), color .2s; cursor: default; }
+  .hero h1 .l:hover { transform: translateY(-14px) rotate(-8deg); color: var(--coral); }
+  .hero h1 .hl { background: var(--yellow); color: #111; padding: 0 .12em; border: 3px solid var(--line); border-radius: 6px; box-shadow: 5px 5px 0 var(--shadow); display: inline-block; transform: rotate(-1.5deg); }
+  .hero h1 .hl .l:hover { color: #111; }
+  .roles { font: 700 clamp(17px, 2.2vw, 21px)/1.4 var(--mono); margin-top: 22px; min-height: 1.5em; }
+  .roles .caret { display: inline-block; width: .6ch; height: 1.1em; background: var(--ink); vertical-align: -3px; margin-left: 2px; animation: blink 1s steps(1) infinite; }
+  .hero-text { margin-top: 18px; color: var(--muted); max-width: 52ch; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+
+  .playground { position: relative; height: 380px; max-width: 100%; }
+  .sticker {
+    position: absolute;
+    border: 3px solid var(--line);
+    box-shadow: 5px 5px 0 var(--shadow);
+    display: grid; place-items: center;
+    font: 800 20px/1 var(--display);
+    color: #111;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    transition: box-shadow .2s, transform .25s var(--ease);
+  }
+  .sticker.dragging { cursor: grabbing; box-shadow: 12px 12px 0 var(--shadow); transition: box-shadow .2s; z-index: 5; }
+  .sticker.idle { animation: bob 4s ease-in-out infinite; }
+  .s-mbp { width: 170px; height: 170px; left: 18%; top: 22%; background: var(--paper); color: var(--ink); font-size: 58px; border-radius: 10px; transform: rotate(-5deg); }
+  .s-dot { width: 86px; height: 86px; border-radius: 50%; background: var(--coral); right: 6%; top: 4%; animation-delay: -1s; }
+  .s-sq { width: 76px; height: 76px; border-radius: 6px; background: var(--sky); left: 4%; bottom: 8%; transform: rotate(14deg); animation-delay: -2s; }
+  .s-tag { padding: 10px 14px; border-radius: 999px; background: var(--yellow); right: 2%; bottom: 14%; font: 700 14px/1 var(--mono); animation-delay: -3s; }
+  .s-py { padding: 8px 12px; border-radius: 6px; background: var(--paper); color: var(--ink); left: 2%; top: 4%; font: 700 14px/1 var(--mono); animation-delay: -1.5s; }
+  .hint { position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); font: 500 12px/1 var(--mono); color: var(--muted); white-space: nowrap; }
+
+  /* marquee */
+  .marquee { border-block: 3px solid var(--line); background: var(--ink); color: var(--yellow); overflow: hidden; margin-inline: -20px; transform: rotate(-1.2deg); }
+  .marquee-track { display: flex; width: max-content; animation: slide 26s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee span { font: 700 18px/1 var(--mono); padding: 16px 22px; white-space: nowrap; letter-spacing: .06em; }
+  .marquee span:nth-child(3n+2) { color: var(--bg); }
+
+  /* RBAC simulator */
+  .sim { padding: 22px; display: grid; gap: 18px; }
+  .sim-controls { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .seg { display: inline-flex; border: 3px solid var(--line); border-radius: 8px; overflow: hidden; box-shadow: 4px 4px 0 var(--shadow); }
+  .seg button {
+    font: 700 14px/1 var(--mono); padding: 12px 14px; border: 0; background: var(--paper); color: var(--ink); cursor: pointer;
+    transition: background .25s, color .25s;
+  }
+  .seg button + button { border-left: 3px solid var(--line); }
+  .seg button[aria-pressed="true"] { background: var(--yellow); color: #111; }
+  .sim-note { font: 500 14px/1.5 var(--mono); color: var(--muted); }
+  .sim-note b { color: var(--ink); }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 620px; }
+  th { text-align: left; font: 700 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; background: var(--ink); color: var(--yellow); padding: 12px; }
+  td { padding: 12px; border-bottom: 2px dashed color-mix(in srgb, var(--ink) 18%, transparent); font-size: 15px; vertical-align: middle; }
+  tr.row { transition: opacity .35s ease, transform .35s var(--ease); }
+  tr.row.hidden-row { opacity: .16; transform: translateX(10px); }
+  tr.row.hidden-row td { text-decoration: line-through; }
+  .chip { display: inline-block; font: 700 11px/1 var(--mono); padding: 5px 8px; border: 2px solid var(--line); border-radius: 4px; color: #111; }
+  .c-web { background: var(--yellow); } .c-net { background: var(--sky); } .c-app { background: var(--paper); color: var(--ink); } .c-gen { background: var(--coral); }
+  .vis { font: 500 13px/1 var(--mono); }
+  .act { display: inline-flex; gap: 6px; flex-wrap: wrap; }
+  .act span { font: 700 11px/1 var(--mono); padding: 5px 7px; border-radius: 4px; border: 2px solid var(--line); }
+  .act .full { background: var(--ok); color: #111; }
+  .act .ro { background: var(--paper); color: var(--ink); }
+  .act .none { background: transparent; color: var(--muted); border-style: dashed; }
+  .counter { display: flex; gap: 14px; flex-wrap: wrap; }
+  .counter div { font: 700 14px/1 var(--mono); }
+  .counter b { font: 800 30px/1 var(--display); display: block; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+
+  /* workflow */
+  .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; position: relative; }
+  .flow::before { content: ""; position: absolute; left: 6%; right: 6%; top: 38px; height: 4px; background: color-mix(in srgb, var(--ink) 20%, transparent); }
+  .flow .fill { position: absolute; left: 6%; top: 38px; height: 4px; background: var(--coral); width: 0; transition: width .6s var(--ease); }
+  .step {
+    position: relative; z-index: 1;
+    background: var(--paper); border: 3px solid var(--line); border-radius: 8px; box-shadow: 4px 4px 0 var(--shadow);
+    padding: 14px; cursor: pointer; text-align: left; color: var(--ink);
+    font: inherit;
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s;
+  }
+  .step:hover { transform: translateY(-4px) rotate(-1deg); box-shadow: 6px 8px 0 var(--shadow); }
+  .step[aria-selected="true"] { background: var(--yellow); color: #111; transform: translateY(-6px); box-shadow: 6px 10px 0 var(--shadow); }
+  .step .n { font: 800 34px/1 var(--display); display: block; }
+  .step .t { font-weight: 700; font-size: 15px; display: block; margin-top: 8px; }
+  .step-detail { margin-top: 20px; padding: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: start; }
+  .step-detail h3 { font-size: 28px; margin-bottom: 10px; }
+  .step-detail p { color: var(--muted); }
+  .step-detail pre { margin: 0; background: var(--term-bg); color: var(--term-text); padding: 16px; border-radius: 6px; font: 500 13.5px/1.7 var(--mono); overflow-x: auto; border: 3px solid var(--line); }
+  .swap { animation: swapIn .45s var(--ease); }
+
+  /* terminal */
+  .term { background: var(--term-bg); border: 3px solid var(--line); border-radius: 10px; box-shadow: 8px 8px 0 var(--shadow); overflow: hidden; }
+  .term-bar { display: flex; align-items: center; gap: 8px; padding: 12px 14px; background: var(--yellow); border-bottom: 3px solid var(--line); color: #111; }
+  .term-bar i { width: 13px; height: 13px; border-radius: 50%; border: 2px solid #111; display: inline-block; }
+  .term-bar i:nth-child(1) { background: var(--coral); } .term-bar i:nth-child(2) { background: #fff; } .term-bar i:nth-child(3) { background: var(--sky); }
+  .term-bar span { font: 700 13px/1 var(--mono); margin-left: 8px; }
+  .term-bar .btn { margin-left: auto; padding: 8px 12px; font-size: 13px; box-shadow: 3px 3px 0 #111; border-color: #111; background: #fff; }
+  .term-body { padding: 18px; font: 500 14px/1.75 var(--mono); color: var(--term-text); min-height: 330px; overflow-x: auto; white-space: pre; }
+  .term-body .g { color: #5BE08E; } .term-body .r { color: #FF8A8A; } .term-body .y { color: var(--yellow); } .term-body .d { color: #8F8872; }
+  .bar { height: 12px; border: 2px solid var(--term-text); border-radius: 3px; margin-top: 10px; width: min(420px, 100%); overflow: hidden; }
+  .bar div { height: 100%; width: 0; background: #5BE08E; transition: width .25s linear; }
+
+  /* commit builder */
+  .builder { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .builder .box { padding: 22px; display: grid; gap: 16px; align-content: start; }
+  .types { display: flex; flex-wrap: wrap; gap: 8px; }
+  .types button {
+    font: 700 13px/1 var(--mono); padding: 10px 12px; border-radius: 6px; border: 3px solid var(--line); background: var(--paper); color: var(--ink); cursor: pointer;
+    transition: transform .2s var(--ease), background .2s;
+  }
+  .types button:hover { transform: rotate(-3deg) scale(1.05); }
+  .types button[aria-pressed="true"] { background: var(--coral); color: #111; }
+  label { font: 700 13px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 8px; }
+  input[type="text"] {
+    width: 100%; font: 500 16px/1.4 var(--mono); padding: 12px 14px; border: 3px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink);
+    transition: box-shadow .2s;
+  }
+  input[type="text"]:focus { outline: none; box-shadow: 4px 4px 0 var(--coral); }
+  .preview { font: 700 clamp(16px, 2.4vw, 20px)/1.4 var(--mono); background: var(--term-bg); color: var(--term-text); padding: 18px; border-radius: 6px; border: 3px solid var(--line); word-break: break-word; min-height: 64px; }
+  .preview .ty { color: var(--yellow); }
+  .checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font: 500 14px/1.4 var(--mono); }
+  .checks li { display: flex; gap: 10px; align-items: center; transition: color .2s; }
+  .checks li::before { content: ""; width: 16px; height: 16px; border: 2px solid var(--line); border-radius: 3px; flex: none; transition: background .25s var(--ease), transform .25s var(--ease); }
+  .checks li.ok::before { background: var(--ok); transform: rotate(-8deg) scale(1.1); }
+  .checks li.bad { color: var(--muted); }
+  .copy-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .toast { font: 700 13px/1 var(--mono); color: var(--ok); opacity: 0; transition: opacity .3s; }
+  .toast.show { opacity: 1; }
+
+  /* stack */
+  .stack { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media (max-width: 760px) { .stack { grid-template-columns: repeat(2, 1fr); } }
+  .tile {
+    padding: 18px; min-height: 130px; display: flex; flex-direction: column; justify-content: space-between;
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    transform-style: preserve-3d;
+  }
+  .tile b { font: 800 22px/1.1 var(--display); overflow-wrap: anywhere; }
+  .tile { gap: 10px; }
+  .logo-ic { width: 44px; height: 44px; border: 2px solid #111; border-radius: 10px; transition: transform .35s var(--ease); }
+  .tile:hover .logo-ic { transform: rotate(-10deg) scale(1.12); }
+  .mail { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+  .mail code { font: 700 15px/1 var(--mono); background: var(--paper); border: 3px solid var(--line); border-radius: 6px; padding: 10px 12px; user-select: all; }
+  .mail .btn { padding: 10px 12px; font-size: 13px; }
+  .tile span { font: 500 13px/1.4 var(--mono); color: var(--muted); }
+  .tile:nth-child(3n+1) { background: var(--yellow); color: #111; }
+  .tile:nth-child(3n+1) span { color: #3D372A; }
+  .tile:nth-child(5n+3) { background: var(--sky); color: #111; }
+  .tile:nth-child(5n+3) span { color: #1F3550; }
+
+  footer { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: end; border-top: 3px solid var(--line); padding-top: 26px; }
+  footer .big { font: 800 clamp(34px, 6vw, 64px)/1 var(--display); }
+  footer p { color: var(--muted); font: 500 14px/1.5 var(--mono); }
+
+  #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
+
+  .reveal { transition: transform .8s var(--ease); }
+  .reveal.pre { transform: translateY(26px); }
+
+  @keyframes blink { 50% { opacity: 0; } }
+  @keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+  @keyframes slide { to { transform: translateX(-50%); } }
+  @keyframes swapIn { from { transform: translateY(10px) scale(.98); } to { transform: none; } }
+
+  @media (max-width: 860px) {
+    .hero, .builder, .step-detail { grid-template-columns: 1fr; }
+    .playground { height: 300px; }
+    .s-mbp { width: 130px; height: 130px; font-size: 44px; }
+    .flow { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+    .flow::before, .flow .fill { top: 30px; }
+    .step { padding: 10px 8px; }
+    .step .n { font-size: 24px; }
+    .step .t { font-size: 12px; }
+  }
+  @media (max-width: 520px) {
+    .step .t { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head><body>
+
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<main>
+  <header class="topbar">
+    <div class="logo">MBP</div>
+    <div class="top-actions">
+      <a class="btn ghost" href="https://github.com/Masbismaa" target="_blank" rel="noopener">GitHub</a>
+      <button class="btn" id="themeBtn" type="button">Ganti tema</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">Full stack developer</span>
+      <h1 id="heroName"><span class="word">Mochammad</span><br><span class="word">Bisma</span> <span class="hl word">Prasetya</span></h1>
+      <div class="roles" aria-live="polite"><span>&gt; </span><span id="roleText"></span><span class="caret"></span></div>
+      <p class="hero-text">Aku membangun aplikasi web dari ujung ke ujung: requirement, desain database, backend Django dan Flask, frontend, sampai test. Semua dikerjakan per milestone, dan setiap milestone di-commit.</p>
+      <div class="hero-ctas">
+        <a class="btn" href="#rbac">Coba simulator ALR</a>
+        <a class="btn ghost" href="#pytest">Jalankan test</a>
+      </div>
+    </div>
+    <div class="playground" id="playground" aria-label="Stiker yang bisa digeser">
+      <div class="sticker s-py idle">python</div>
+      <div class="sticker s-dot idle"></div>
+      <div class="sticker s-mbp">MBP</div>
+      <div class="sticker s-sq idle"></div>
+      <div class="sticker s-tag idle">17 passed</div>
+      <span class="hint">geser stikernya</span>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marquee"></div>
+  </div>
+
+  <section id="rbac" class="reveal">
+    <div class="section-head">
+      <span class="eyebrow">Proyek unggulan / ALR</span>
+      <h2>Siapa boleh lihat apa?</h2>
+      <p>ALR (Access Link Register) menyimpan link akses ICT di satu tempat. Pilih role di bawah dan lihat bagaimana aturan Public / Private bekerja. Datanya contoh.</p>
+    </div>
+    <div class="box sim">
+      <div class="sim-controls">
+        <div class="seg" role="group" aria-label="Pilih role">
+          <button type="button" data-role="admin" aria-pressed="false">Admin</button>
+          <button type="button" data-role="mbp" aria-pressed="true">User Entry: MBP</button>
+          <button type="button" data-role="rna" aria-pressed="false">User Entry: RNA</button>
+        </div>
+      </div>
+      <p class="sim-note" id="simNote"></p>
+      <div class="counter" id="counter"></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Title</th><th>Category</th><th>Owner</th><th>Visibility</th><th>Akses</th></tr></thead>
+          <tbody id="simBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="flow" class="reveal">
+    <div class="section-head">
+      <span class="eyebrow">Cara kerja</span>
+      <h2>Lima langkah tiap fitur</h2>
+      <p>Urutan ini aku pakai untuk setiap tugas. Klik langkahnya untuk lihat isinya.</p>
+    </div>
+    <div class="flow" role="tablist" id="flowList">
+      <div class="fill" id="flowFill"></div>
+    </div>
+    <div class="box step-detail" id="flowDetail"></div>
+  </section>
+
+  <section id="pytest" class="reveal">
+    <div class="section-head">
+      <span class="eyebrow">Testing</span>
+      <h2>Test dulu, baru merge</h2>
+      <p>Setiap fitur punya skenario positive dan negative. Tekan tombolnya untuk menjalankan simulasi test suite ALR.</p>
+    </div>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><span>PS C:\alr&gt; pytest -v</span><button class="btn" id="runBtn" type="button">Run pytest</button></div>
+      <div class="term-body" id="termBody"></div>
+    </div>
+  </section>
+
+  <section id="commit" class="reveal">
+    <div class="section-head">
+      <span class="eyebrow">Conventional Commits</span>
+      <h2>Bikin pesan commit yang rapi</h2>
+      <p>Format yang aku pakai: type tanpa scope, deskripsi bahasa Indonesia huruf kecil. Coba ketik sendiri.</p>
+    </div>
+    <div class="builder">
+      <div class="box">
+        <div>
+          <label>Type</label>
+          <div class="types" id="types"></div>
+        </div>
+        <div>
+          <label for="desc">Deskripsi</label>
+          <input type="text" id="desc" value="tambah validasi duplikasi url" maxlength="72" autocomplete="off">
+        </div>
+        <ul class="checks" id="checks"></ul>
+      </div>
+      <div class="box">
+        <label>Hasil</label>
+        <div class="preview" id="preview"></div>
+        <div class="copy-row">
+          <button class="btn coral" id="copyBtn" type="button">Salin perintah</button>
+          <span class="toast" id="toast">Tersalin</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack" class="reveal">
+    <div class="section-head">
+      <span class="eyebrow">Stack</span>
+      <h2>Alat yang aku pakai</h2>
+    </div>
+    <div class="stack" id="stackGrid"></div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="big">Build slow.<br>Test everything.</div>
+    </div>
+    <div style="display:grid;gap:12px;justify-items:end">
+      <div class="mail"><code id="mailText">moch.bismap@gmail.com</code><button class="btn" id="mailBtn" type="button">Salin email</button></div>
+      <p>Mochammad Bisma Prasetya / <a href="https://github.com/Masbismaa" target="_blank" rel="noopener">github.com/Masbismaa</a></p>
+    </div>
+  </footer>
+</main>
+
+<script>
+(() => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // theme
+  const root = document.documentElement;
+  const themeBtn = document.getElementById('themeBtn');
+  const isDark = () => root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  try { const t = localStorage.getItem('mbp-theme'); if (t) root.dataset.theme = t; } catch (e) {}
+  themeBtn.addEventListener('click', () => {
+    root.dataset.theme = isDark() ? 'light' : 'dark';
+    try { localStorage.setItem('mbp-theme', root.dataset.theme); } catch (e) {}
+  });
+
+  // hero letters
+  document.querySelectorAll('#heroName .word').forEach(w => {
+    w.innerHTML = [...w.textContent].map(c => `<span class="l">${c}</span>`).join('');
+  });
+
+  // rotating roles, typed
+  const roles = ['building ALR, one milestone at a time', 'django / flask / postgresql', 'full stack, backend sampai UI', 'neobrutalism, smooth transitions'];
+  const roleEl = document.getElementById('roleText');
+  if (reduce) { roleEl.textContent = roles[0]; } else {
+    let ri = 0, ci = 0, del = false;
+    const tick = () => {
+      const r = roles[ri];
+      roleEl.textContent = r.slice(0, ci);
+      if (!del && ci < r.length) { ci++; setTimeout(tick, 45); }
+      else if (!del) { del = true; setTimeout(tick, 1800); }
+      else if (ci > 0) { ci--; setTimeout(tick, 22); }
+      else { del = false; ri = (ri + 1) % roles.length; setTimeout(tick, 300); }
+    };
+    tick();
+  }
+
+  // draggable stickers
+  const pg = document.getElementById('playground');
+  pg.querySelectorAll('.sticker').forEach(s => {
+    let sx, sy, ox, oy;
+    s.addEventListener('pointerdown', e => {
+      s.setPointerCapture(e.pointerId);
+      const r = s.getBoundingClientRect(), pr = pg.getBoundingClientRect();
+      s.style.left = (r.left - pr.left) + 'px'; s.style.top = (r.top - pr.top) + 'px';
+      s.style.right = 'auto'; s.style.bottom = 'auto';
+      sx = e.clientX; sy = e.clientY; ox = r.left - pr.left; oy = r.top - pr.top;
+      s.classList.add('dragging'); s.classList.remove('idle');
+    });
+    s.addEventListener('pointermove', e => {
+      if (!s.classList.contains('dragging')) return;
+      const pr = pg.getBoundingClientRect();
+      const nx = Math.max(-10, Math.min(pr.width - s.offsetWidth + 10, ox + e.clientX - sx));
+      const ny = Math.max(-10, Math.min(pr.height - s.offsetHeight + 10, oy + e.clientY - sy));
+      s.style.left = nx + 'px'; s.style.top = ny + 'px';
+      s.style.transform = `rotate(${(e.clientX - sx) / 18}deg)`;
+    });
+    const end = () => { s.classList.remove('dragging'); s.style.transform = 'rotate(0deg)'; };
+    s.addEventListener('pointerup', end); s.addEventListener('pointercancel', end);
+  });
+
+  // marquee
+  const words = ['PYTHON', 'DJANGO', 'FLASK', 'POSTGRESQL', 'PYTEST', 'RBAC', 'AUDIT LOG', 'OTP LOGIN', 'EXPORT XLSX', 'DRY', 'CONVENTIONAL COMMITS'];
+  const mq = document.getElementById('marquee');
+  mq.innerHTML = [...words, ...words].map(w => `<span>${w} ///</span>`).join('');
+
+  // RBAC simulator
+  const data = [
+    { t: 'Portal HRIS', c: 'WEB', cc: 'c-web', o: 'MBP', v: 'Public' },
+    { t: 'Core Switch L3', c: 'NETWORK', cc: 'c-net', o: 'MBP', v: 'Private' },
+    { t: 'SAP GUI Prod', c: 'APPLICATION', cc: 'c-app', o: 'RNA', v: 'Public' },
+    { t: 'Firewall Branch', c: 'NETWORK', cc: 'c-net', o: 'RNA', v: 'Private' },
+    { t: 'Panduan VPN', c: 'GENERAL', cc: 'c-gen', o: 'MBP', v: 'Public' },
+    { t: 'CCTV Gudang', c: 'WEB', cc: 'c-web', o: 'DWI', v: 'Public' }
+  ];
+  const notes = {
+    admin: '<b>Admin</b>: CRUD penuh ke semua data Public milik siapa pun. Data Private tetap tidak terlihat.',
+    mbp: '<b>User Entry (MBP)</b>: CRUD penuh ke data sendiri, Public maupun Private. Data Public orang lain cuma bisa dilihat dan disalin.',
+    rna: '<b>User Entry (RNA)</b>: aturan sama, tapi dari sudut pandang RNA. Data Private MBP ikut hilang.'
+  };
+  const access = (role, row) => {
+    if (role === 'admin') return row.v === 'Public' ? 'full' : 'none';
+    const me = role === 'mbp' ? 'MBP' : 'RNA';
+    if (row.o === me) return 'full';
+    return row.v === 'Public' ? 'ro' : 'none';
+  };
+  const body = document.getElementById('simBody');
+  body.innerHTML = data.map((r, i) => `<tr class="row" data-i="${i}"><td><b>${r.t}</b></td><td><span class="chip ${r.cc}">${r.c}</span></td><td class="mono">${r.o}</td><td class="vis">${r.v}</td><td class="act"></td></tr>`).join('');
+  const counter = document.getElementById('counter');
+  const animateNum = (el, to) => {
+    const from = +el.dataset.v || 0; el.dataset.v = to;
+    if (reduce) { el.textContent = to; return; }
+    const t0 = performance.now();
+    const step = t => { const p = Math.min(1, (t - t0) / 400); el.textContent = Math.round(from + (to - from) * p); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  };
+  counter.innerHTML = '<div><b id="cFull">0</b>CRUD penuh</div><div><b id="cRo">0</b>read-only</div><div><b id="cNone">0</b>tersembunyi</div>';
+  const setRole = role => {
+    document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', b.dataset.role === role));
+    document.getElementById('simNote').innerHTML = notes[role];
+    const n = { full: 0, ro: 0, none: 0 };
+    body.querySelectorAll('tr').forEach((tr, i) => {
+      const a = access(role, data[i]); n[a]++;
+      setTimeout(() => {
+        tr.classList.toggle('hidden-row', a === 'none');
+        tr.querySelector('.act').innerHTML = a === 'full' ? '<span class="full">VIEW</span><span class="full">EDIT</span><span class="full">DELETE</span>'
+          : a === 'ro' ? '<span class="ro">VIEW</span><span class="ro">COPY LINK</span>' : '<span class="none">TIDAK TERLIHAT</span>';
+      }, reduce ? 0 : i * 60);
+    });
+    animateNum(document.getElementById('cFull'), n.full);
+    animateNum(document.getElementById('cRo'), n.ro);
+    animateNum(document.getElementById('cNone'), n.none);
+  };
+  document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => setRole(b.dataset.role)));
+  setRole('mbp');
+
+  // workflow
+  const steps = [
+    { n: '01', t: 'Requirement', h: 'Analisis requirement', p: 'Baca spesifikasi, lalu kaitkan tugas ke nomor SR yang relevan. Tujuannya jelas dulu sebelum menulis satu baris kode.', code: 'SR-06  validasi format url (http/https)\nSR-06  deteksi duplikasi url/address/port\nSR-07  ekstensi jpg/png/pdf, max 10MB' },
+    { n: '02', t: 'Schema', h: 'Desain schema', p: 'Tabel snake_case plural, model ORM PascalCase singular, primary key id, foreign key nama_entitas_id.', code: 'class AccessEntry(Base):\n    __tablename__ = "access_entries"\n    id = Column(Integer, primary_key=True)\n    category_id = Column(ForeignKey("categories.id"))\n    is_active = Column(Boolean, default=True)' },
+    { n: '03', t: 'Logika', h: 'Logika bisnis & RBAC', p: 'Validasi input dan aturan akses ditaruh di services, bukan di routes. Satu fungsi, satu tugas.', code: 'def can_edit_entry(user, entry) -> bool:\n    if user.role == "admin":\n        return entry.visibility == "public"\n    return entry.created_by == user.id' },
+    { n: '04', t: 'Testing', h: 'Skenario test', p: 'Setiap aturan diuji dari dua sisi: yang harus berhasil dan yang harus ditolak.', code: 'def test_admin_cannot_edit_private_entry():\n    entry = make_entry(visibility="private")\n    assert not can_edit_entry(admin_user, entry)' },
+    { n: '05', t: 'Commit', h: 'Commit per milestone', p: 'Satu milestone selesai, satu commit. Formatnya Conventional Commits dengan deskripsi bahasa Indonesia.', code: 'git add .\ngit commit -m "feat: tambah validasi duplikasi url"\ngit push origin feature/validasi-url' }
+  ];
+  const flowList = document.getElementById('flowList');
+  steps.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.className = 'step'; b.type = 'button'; b.setAttribute('role', 'tab');
+    b.innerHTML = `<span class="n">${s.n}</span><span class="t">${s.t}</span>`;
+    b.addEventListener('click', () => setStep(i));
+    flowList.appendChild(b);
+  });
+  const detail = document.getElementById('flowDetail');
+  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const setStep = i => {
+    flowList.querySelectorAll('.step').forEach((b, j) => b.setAttribute('aria-selected', j === i));
+    document.getElementById('flowFill').style.width = (i / (steps.length - 1)) * 88 + '%';
+    const s = steps[i];
+    detail.innerHTML = `<div><span class="eyebrow">Langkah ${s.n}</span><h3>${s.h}</h3><p>${s.p}</p></div><pre>${esc(s.code)}</pre>`;
+    detail.classList.remove('swap'); void detail.offsetWidth; detail.classList.add('swap');
+  };
+  setStep(0);
+
+  // pytest terminal
+  const tests = [
+    'test_auth.py::test_login_email_korporat_valid',
+    'test_auth.py::test_login_password_salah_ditolak',
+    'test_auth.py::test_otp_kadaluarsa_ditolak',
+    'test_rbac.py::test_admin_crud_data_public',
+    'test_rbac.py::test_admin_tidak_lihat_data_private',
+    'test_rbac.py::test_user_entry_readonly_public_orang_lain',
+    'test_entry.py::test_url_tanpa_http_ditolak',
+    'test_entry.py::test_duplikasi_url_terdeteksi',
+    'test_entry.py::test_attachment_lebih_10mb_ditolak',
+    'test_entry.py::test_export_excel_berhasil',
+    'test_audit.py::test_audit_log_tidak_bisa_diubah'
+  ];
+  const term = document.getElementById('termBody');
+  const runBtn = document.getElementById('runBtn');
+  const idle = () => { term.innerHTML = '<span class="d">platform win32 -- Python 3.12, pytest-8</span>\n<span class="d">rootdir: C:\\alr</span>\n\n<span class="y">Siap. Tekan Run pytest.</span>'; };
+  idle();
+  let running = false;
+  runBtn.addEventListener('click', async () => {
+    if (running) return; running = true; runBtn.disabled = true;
+    const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+    term.innerHTML = `<span class="d">collected ${tests.length} items</span>\n\n`;
+    const out = document.createElement('span'); term.appendChild(out);
+    const barWrap = document.createElement('div'); barWrap.className = 'bar'; barWrap.innerHTML = '<div></div>';
+    for (let i = 0; i < tests.length; i++) {
+      out.insertAdjacentHTML('beforeend', `${tests[i]} `);
+      await wait(90 + Math.random() * 160);
+      const pct = Math.round(((i + 1) / tests.length) * 100);
+      out.insertAdjacentHTML('beforeend', `<span class="g">PASSED</span> <span class="d">[${String(pct).padStart(3)}%]</span>\n`);
+      term.scrollTop = term.scrollHeight;
+    }
+    await wait(250);
+    term.insertAdjacentHTML('beforeend', `\n<span class="g">========== ${tests.length} passed in 1.84s ==========</span>`);
+    term.appendChild(barWrap);
+    requestAnimationFrame(() => barWrap.firstChild.style.width = '100%');
+    confetti(runBtn);
+    running = false; runBtn.disabled = false; runBtn.textContent = 'Run lagi';
+  });
+
+  // commit builder
+  const types = { feat: 'fitur baru', fix: 'perbaikan bug', docs: 'dokumentasi', test: 'tambah test', refactor: 'rapikan kode', style: 'format & css', chore: 'tugas rutin' };
+  let curType = 'feat';
+  const typesEl = document.getElementById('types');
+  typesEl.innerHTML = Object.keys(types).map(t => `<button type="button" data-t="${t}" aria-pressed="${t === curType}" title="${types[t]}">${t}</button>`).join('');
+  const desc = document.getElementById('desc');
+  const preview = document.getElementById('preview');
+  const checks = document.getElementById('checks');
+  const rules = [
+    { txt: 'type tanpa scope', ok: () => true },
+    { txt: 'deskripsi tidak kosong', ok: d => d.trim().length > 0 },
+    { txt: 'huruf kecil di awal', ok: d => d.trim() && d.trim()[0] === d.trim()[0].toLowerCase() },
+    { txt: 'tanpa titik di akhir', ok: d => !/\.\s*$/.test(d) },
+    { txt: 'maksimal 50 karakter', ok: d => d.trim().length <= 50 }
+  ];
+  const render = () => {
+    const d = desc.value;
+    preview.innerHTML = `git commit -m "<span class="ty">${curType}:</span> ${esc(d.trim()) || '<span class="d">...</span>'}"`;
+    checks.innerHTML = rules.map(r => `<li class="${r.ok(d) ? 'ok' : 'bad'}">${r.txt}</li>`).join('');
+  };
+  typesEl.addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    curType = b.dataset.t;
+    typesEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    render();
+  });
+  desc.addEventListener('input', render);
+  render();
+  const toast = document.getElementById('toast');
+  document.getElementById('copyBtn').addEventListener('click', e => {
+    const text = `git commit -m "${curType}: ${desc.value.trim()}"`;
+    const done = () => { toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 1400); confetti(e.currentTarget, 40); };
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done).catch(() => { const r = document.createRange(); r.selectNodeContents(preview); getSelection().removeAllRanges(); getSelection().addRange(r); toast.textContent = 'Teks dipilih, tekan Ctrl+C'; done(); });
+  });
+
+  // copy email
+  const mailBtn = document.getElementById('mailBtn');
+  mailBtn.addEventListener('click', () => {
+    const ok = () => { mailBtn.textContent = 'Tersalin'; confetti(mailBtn, 40); setTimeout(() => mailBtn.textContent = 'Salin email', 1500); };
+    const sel = () => { const r = document.createRange(); r.selectNodeContents(document.getElementById('mailText')); getSelection().removeAllRanges(); getSelection().addRange(r); mailBtn.textContent = 'Tekan Ctrl+C'; };
+    if (navigator.clipboard) navigator.clipboard.writeText('moch.bismap@gmail.com').then(ok).catch(sel); else sel();
+  });
+
+  // stack tiles with tilt
+  const stack = [
+    ['Python', 'bahasa utama', 'python'], ['Django', 'framework full stack', 'django'], ['Flask', 'API ringan & modular', 'flask'],
+    ['PostgreSQL', 'db_mtoa_alr', 'postgres'], ['HTML / CSS / JS', 'frontend, dipisah per file', 'js'], ['Pytest', 'positive & negative', 'python'],
+    ['Git + GitLab CI', 'main / develop / feature', 'gitlab'], ['PowerShell', 'perintah satu baris', 'powershell']
+  ];
+  const grid = document.getElementById('stackGrid');
+  grid.innerHTML = stack.map(([a, b, ic]) => `<div class="box tile"><img class="logo-ic" src="https://skillicons.dev/icons?i=${ic}" alt="" width="44" height="44" loading="lazy" onerror="this.remove()"><b>${a}</b><span>${b}</span></div>`).join('');
+  if (!reduce) grid.querySelectorAll('.tile').forEach(t => {
+    t.addEventListener('pointermove', e => {
+      const r = t.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      t.style.transform = `perspective(600px) rotateX(${-y * 14}deg) rotateY(${x * 14}deg) translateY(-4px)`;
+    });
+    t.addEventListener('pointerleave', () => t.style.transform = '');
+  });
+
+  // scroll reveal (content stays visible; only a small lift)
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.remove('pre'); io.unobserve(en.target); } }), { threshold: .12 });
+    document.querySelectorAll('.reveal').forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top > innerHeight) { el.classList.add('pre'); io.observe(el); }
+    });
+  }
+
+  // confetti
+  const cv = document.getElementById('confetti'), cx = cv.getContext('2d');
+  let parts = [], raf = null;
+  const size = () => { cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; cx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0); };
+  size(); addEventListener('resize', size);
+  const colors = ['#FFD23F', '#FF6B6B', '#74B9FF', '#22B864', '#111111'];
+  function confetti(el, n = 90) {
+    if (reduce) return;
+    const r = el.getBoundingClientRect();
+    for (let i = 0; i < n; i++) parts.push({
+      x: r.left + r.width / 2, y: r.top + r.height / 2,
+      vx: (Math.random() - .5) * 12, vy: -Math.random() * 12 - 4,
+      s: 6 + Math.random() * 7, a: Math.random() * 6, va: (Math.random() - .5) * .4,
+      c: colors[i % colors.length], life: 0, sq: Math.random() > .5
+    });
+    if (!raf) loop();
+  }
+  function loop() {
+    cx.clearRect(0, 0, innerWidth, innerHeight);
+    parts = parts.filter(p => p.life < 140 && p.y < innerHeight + 40);
+    parts.forEach(p => {
+      p.life++; p.vy += .35; p.vx *= .985; p.x += p.vx; p.y += p.vy; p.a += p.va;
+      cx.save(); cx.translate(p.x, p.y); cx.rotate(p.a); cx.fillStyle = p.c; cx.strokeStyle = '#111'; cx.lineWidth = 1.5;
+      if (p.sq) { cx.fillRect(-p.s / 2, -p.s / 2, p.s, p.s * .6); cx.strokeRect(-p.s / 2, -p.s / 2, p.s, p.s * .6); }
+      else { cx.beginPath(); cx.arc(0, 0, p.s / 2.4, 0, 7); cx.fill(); cx.stroke(); }
+      cx.restore();
+    });
+    raf = parts.length ? requestAnimationFrame(loop) : (cx.clearRect(0, 0, innerWidth, innerHeight), null);
+  }
+})();
+</script>
+</body></html>

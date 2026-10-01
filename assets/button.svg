@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="120" viewBox="0 0 900 120">
+  <style>
+    .sans { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; }
+    .mono { font-family: Consolas, 'SFMono-Regular', Menlo, monospace; }
+    @keyframes press { 0%, 78%, 100% { transform: translate(0, 0); } 84% { transform: translate(8px, 8px); } 90% { transform: translate(-2px, -2px); } }
+    @keyframes arrow { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(12px); } }
+    @keyframes shine { 0%, 55% { transform: translateX(-200px) skewX(-20deg); } 75%, 100% { transform: translateX(1000px) skewX(-20deg); } }
+    @keyframes pulse { 0%, 100% { r: 6; } 50% { r: 9; } }
+    .btn { animation: press 3.2s ease-in-out infinite; }
+    .arrow { animation: arrow 1.1s ease-in-out infinite; }
+    .shine { animation: shine 3.2s ease-in-out infinite; }
+    .dot { animation: pulse 1.4s ease-in-out infinite; }
+  </style>
+  <rect width="900" height="120" fill="#FFF8E7"/>
+  <rect x="98" y="22" width="712" height="80" rx="8" fill="#111"/>
+  <g class="btn">
+    <clipPath id="c"><rect x="90" y="14" width="712" height="80" rx="8"/></clipPath>
+    <rect x="90" y="14" width="712" height="80" rx="8" fill="#FF6B6B" stroke="#111" stroke-width="4"/>
+    <g clip-path="url(#c)"><rect x="0" y="0" width="60" height="120" fill="#fff" opacity=".35" class="shine"/></g>
+    <circle cx="130" cy="54" r="6" fill="#111" class="dot"/>
+    <text x="152" y="63" class="mono" font-size="15" font-weight="700" fill="#111">LIVE</text>
+    <text x="440" y="66" text-anchor="middle" class="sans" font-size="30" font-weight="800" fill="#111">Buka portfolio interaktif</text>
+    <g class="arrow">
+      <path d="M700 54 h54 M736 38 l18 16 -18 16" fill="none" stroke="#111" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+</svg>

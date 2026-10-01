@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300">
+  <style>
+    .sans { font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; }
+    .mono { font-family: Consolas, 'SFMono-Regular', Menlo, monospace; }
+
+    @keyframes pop { 0% { transform: scale(0) rotate(-12deg); } 70% { transform: scale(1.08) rotate(3deg); } 100% { transform: scale(1) rotate(-4deg); } }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-592px); } }
+    @keyframes role { 0%, 2% { opacity: 0; transform: translateY(12px); } 6%, 30% { opacity: 1; transform: translateY(0); } 34%, 100% { opacity: 0; transform: translateY(-12px); } }
+
+    .badge { transform-box: fill-box; transform-origin: center; animation: pop .8s cubic-bezier(.34,1.56,.64,1) both; }
+    .name  { animation: slideIn .7s ease-out .3s both; }
+    .sub   { animation: fadeUp .6s ease-out .7s both; }
+    .role  { opacity: 0; animation: role 9s ease-in-out infinite; }
+    .r2 { animation-delay: 3s; }
+    .r3 { animation-delay: 6s; }
+    .cursor { animation: blink 1s step-end infinite; }
+    .float1 { transform-box: fill-box; animation: bob 3.2s ease-in-out infinite; }
+    .float2 { transform-box: fill-box; animation: bob 4s ease-in-out .8s infinite; }
+    .spin   { transform-box: fill-box; transform-origin: center; animation: spin 12s linear infinite; }
+    .track  { animation: ticker 14s linear infinite; }
+  </style>
+
+  <rect width="900" height="300" fill="#FFF8E7"/>
+
+  <rect x="26" y="26" width="856" height="206" rx="6" fill="#111"/>
+  <rect x="16" y="16" width="856" height="206" rx="6" fill="#FFD23F" stroke="#111" stroke-width="4"/>
+
+  <g class="float1">
+    <circle cx="790" cy="70" r="26" fill="#FF6B6B" stroke="#111" stroke-width="4"/>
+  </g>
+  <g class="float2">
+    <rect x="700" y="140" width="44" height="44" fill="#74B9FF" stroke="#111" stroke-width="4" transform="rotate(12 722 162)"/>
+  </g>
+  <g class="spin">
+    <path d="M820 150 l8 18 20 2 -15 13 5 20 -18 -11 -18 11 5 -20 -15 -13 20 -2z" fill="#fff" stroke="#111" stroke-width="3.5" stroke-linejoin="round"/>
+  </g>
+
+  <g class="badge">
+    <rect x="58" y="62" width="118" height="118" rx="6" fill="#111"/>
+    <rect x="50" y="54" width="118" height="118" rx="6" fill="#fff" stroke="#111" stroke-width="4"/>
+    <text x="109" y="128" text-anchor="middle" class="sans" font-size="42" font-weight="800" fill="#111">MBP</text>
+  </g>
+
+  <g class="name">
+    <text x="200" y="98" class="sans" font-size="36" font-weight="800" fill="#111">Mochammad Bisma Prasetya</text>
+  </g>
+
+  <g class="sub">
+    <text x="202" y="130" class="mono" font-size="17" fill="#111">&gt;</text>
+    <g>
+      <text x="222" y="130" class="mono role" font-size="17" font-weight="700" fill="#111">Full stack developer</text>
+      <text x="222" y="130" class="mono role r2" font-size="17" font-weight="700" fill="#111">Building ALR, one milestone at a time</text>
+      <text x="222" y="130" class="mono role r3" font-size="17" font-weight="700" fill="#111">Django / Flask / PostgreSQL</text>
+    </g>
+
+    <rect x="202" y="160" width="140" height="30" rx="4" fill="#111"/>
+    <text x="272" y="180" text-anchor="middle" class="mono" font-size="13" font-weight="700" fill="#FFD23F">BUILD SLOW</text>
+    <rect x="352" y="160" width="160" height="30" rx="4" fill="#fff" stroke="#111" stroke-width="3"/>
+    <text x="432" y="180" text-anchor="middle" class="mono" font-size="13" font-weight="700" fill="#111">TEST EVERYTHING</text>
+    <rect x="522" y="160" width="140" height="30" rx="4" fill="#FF6B6B" stroke="#111" stroke-width="3"/>
+    <text x="592" y="180" text-anchor="middle" class="mono" font-size="13" font-weight="700" fill="#111">COMMIT CLEAN</text>
+  </g>
+
+  <rect x="16" y="248" width="866" height="38" fill="#111"/>
+  <clipPath id="clip"><rect x="16" y="248" width="866" height="38"/></clipPath>
+  <g clip-path="url(#clip)">
+    <g class="track mono" font-size="15" font-weight="700" fill="#FFD23F">
+      <text x="30" y="273">PYTHON  ///  DJANGO  ///  FLASK  ///  POSTGRESQL  ///  JS  ///  PYTEST  ///</text>
+      <text x="622" y="273">PYTHON  ///  DJANGO  ///  FLASK  ///  POSTGRESQL  ///  JS  ///  PYTEST  ///</text>
+      <text x="1214" y="273">PYTHON  ///  DJANGO  ///  FLASK  ///  POSTGRESQL  ///  JS  ///  PYTEST  ///</text>
+    </g>
+  </g>
+</svg>

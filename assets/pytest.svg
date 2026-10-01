@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="330" viewBox="0 0 900 330">
+  <style>
+    .mono { font-family: Consolas, 'SFMono-Regular', Menlo, monospace; }
+    @keyframes cycle { 0% { opacity: 0; } 3% { opacity: 1; } 93% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes grow { 0%, 46% { transform: scaleX(0); } 60%, 100% { transform: scaleX(1); } }
+    @keyframes blink { 50% { opacity: 0; } }
+    .loop { animation: cycle 10s linear infinite; }
+    .fill { transform-box: fill-box; transform-origin: left; animation: grow 10s ease-out infinite; }
+    .cursor { animation: blink 1s steps(1) infinite; }
+    @keyframes k0 { 0%, 6% { opacity: 0; transform: translateX(-8px); } 8%, 100% { opacity: 1; transform: none; } }
+    .l0 { animation: k0 10s ease-out infinite; }
+    @keyframes k1 { 0%, 11% { opacity: 0; transform: translateX(-8px); } 13%, 100% { opacity: 1; transform: none; } }
+    .l1 { animation: k1 10s ease-out infinite; }
+    @keyframes k2 { 0%, 16% { opacity: 0; transform: translateX(-8px); } 18%, 100% { opacity: 1; transform: none; } }
+    .l2 { animation: k2 10s ease-out infinite; }
+    @keyframes k3 { 0%, 21% { opacity: 0; transform: translateX(-8px); } 23%, 100% { opacity: 1; transform: none; } }
+    .l3 { animation: k3 10s ease-out infinite; }
+    @keyframes k4 { 0%, 26% { opacity: 0; transform: translateX(-8px); } 28%, 100% { opacity: 1; transform: none; } }
+    .l4 { animation: k4 10s ease-out infinite; }
+    @keyframes k5 { 0%, 31% { opacity: 0; transform: translateX(-8px); } 33%, 100% { opacity: 1; transform: none; } }
+    .l5 { animation: k5 10s ease-out infinite; }
+    @keyframes k6 { 0%, 36% { opacity: 0; transform: translateX(-8px); } 38%, 100% { opacity: 1; transform: none; } }
+    .l6 { animation: k6 10s ease-out infinite; }
+    @keyframes k7 { 0%, 44% { opacity: 0; transform: translateX(-8px); } 46%, 100% { opacity: 1; transform: none; } }
+    .l7 { animation: k7 10s ease-out infinite; }
+  </style>
+
+  <rect width="900" height="330" fill="#FFF8E7"/>
+  <rect x="26" y="22" width="856" height="294" rx="8" fill="#111"/>
+  <rect x="16" y="12" width="856" height="294" rx="8" fill="#151411" stroke="#111" stroke-width="4"/>
+  <path d="M16 20 a8 8 0 0 1 8 -8 h840 a8 8 0 0 1 8 8 v34 h-856z" fill="#FFD23F" stroke="#111" stroke-width="4"/>
+  <circle cx="42" cy="34" r="7" fill="#FF6B6B" stroke="#111" stroke-width="2.5"/>
+  <circle cx="64" cy="34" r="7" fill="#fff" stroke="#111" stroke-width="2.5"/>
+  <circle cx="86" cy="34" r="7" fill="#74B9FF" stroke="#111" stroke-width="2.5"/>
+  <text x="112" y="39" class="mono" font-size="14" font-weight="700" fill="#111">PS C:\alr&gt; pytest -v</text>
+
+  <g class="loop mono" font-size="14">
+    <text x="36" y="86" fill="#8F8872">collected 7 items</text>
+
+    <g class="l0"><text x="36" y="116" fill="#F3EBD6">test_auth.py::test_login_email_korporat_valid <tspan fill="#5BE08E">PASSED</tspan></text></g>
+    <g class="l1"><text x="36" y="138" fill="#F3EBD6">test_auth.py::test_otp_kadaluarsa_ditolak <tspan fill="#5BE08E">PASSED</tspan></text></g>
+    <g class="l2"><text x="36" y="160" fill="#F3EBD6">test_rbac.py::test_admin_tidak_lihat_data_private <tspan fill="#5BE08E">PASSED</tspan></text></g>
+    <g class="l3"><text x="36" y="182" fill="#F3EBD6">test_rbac.py::test_user_entry_readonly_public_orang_lain <tspan fill="#5BE08E">PASSED</tspan></text></g>
+    <g class="l4"><text x="36" y="204" fill="#F3EBD6">test_entry.py::test_url_tanpa_http_ditolak <tspan fill="#5BE08E">PASSED</tspan></text></g>
+    <g class="l5"><text x="36" y="226" fill="#F3EBD6">test_entry.py::test_duplikasi_url_terdeteksi <tspan fill="#5BE08E">PASSED</tspan></text></g>
+    <g class="l6"><text x="36" y="248" fill="#F3EBD6">test_audit.py::test_audit_log_tidak_bisa_diubah <tspan fill="#5BE08E">PASSED</tspan></text></g>
+
+    <g class="l7">
+      <text x="36" y="282" fill="#5BE08E" font-weight="700">========== 7 passed in 1.84s ==========</text>
+    </g>
+    <rect x="520" y="270" width="320" height="14" rx="3" fill="none" stroke="#F3EBD6" stroke-width="2"/>
+    <rect x="522" y="272" width="316" height="10" fill="#5BE08E" class="fill"/>
+  </g>
+  <rect x="36" y="292" width="9" height="3" fill="#F3EBD6" class="cursor"/>
+</svg>
